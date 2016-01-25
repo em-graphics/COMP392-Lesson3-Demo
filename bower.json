@@ -1,9 +1,9 @@
 {
-  "name": "comp392-threejsboilerplate",
+  "name": "comp392-lesson3-demo",
   "authors": [
     "Tom Tsiliopoulos <tsiliopoulos@hotmail.com>"
   ],
-  "description": "COMP392-ThreeJSBoilerPlate for Advanced Graphics",
+  "description": "COMP392-Lesson3-Demo for Advanced Graphics",
   "main": "",
   "moduleType": [],
   "license": "MIT",
