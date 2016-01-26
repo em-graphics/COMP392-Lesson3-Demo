@@ -4,15 +4,17 @@ module objects {
     // CONTROL CLASS ++++++++++++++++++++++++++++++++++++++++++
     export class Control { 
         //PUBLIC INSTANCE VARIABLES +++++++++++++++++++++++++++
-        public points: objects.Point[];
-        public mesh: Object3D;
+       // public points: objects.Point[];
+        //public mesh: Object3D;
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++
-        constructor(mesh: Object3D) {
-            this.points = new Array<objects.Point>();
-            this.mesh = mesh;
+        //constructor(mesh: Object3D) {
+            constructor() {
+          //  this.points = new Array<objects.Point>();
+            //this.mesh = mesh;
         }
         
         //PUBLIC METHODS +++++++++++++++++++++++++++++++++++++++
+        /*
         public clone(): void {
             var materials = [
                 new THREE.MeshLambertMaterial({ opacity: 0.6, color: 0xff44ff, transparent: true }),
@@ -28,6 +30,6 @@ module objects {
             mesh2.name = "clone";
             scene.remove(scene.getObjectByName("clone"));
             scene.add(mesh2);
-        }
+        }*/
     }
 }

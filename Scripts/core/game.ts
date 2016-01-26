@@ -43,12 +43,15 @@ var control: Control;
 var gui: GUI;
 var stats: Stats;
 var step: number = 0;
+var cubeGeometry:CubeGeometry;
+var cubeMaterial:LambertMaterial;
+/*
 var vertices: Vector3[] = new Array<Vector3>();
 var faces: Face3[] = new Array<Face3>();
 var customGeometry: Geometry;
 var customMaterials: Material[] = new Array<Material>();
 var customMesh: Object3D;
-
+*/
 function init() {
     // Instantiate a new Scene object
     scene = new Scene();
@@ -58,13 +61,13 @@ function init() {
     setupCamera(); // setup the camera
 	
     // add an axis helper to the scene
-    axes = new AxisHelper(20);
+    axes = new AxisHelper(10);
     scene.add(axes);
     console.log("Added Axis Helper to scene...");
     
     //Add a Plane to the Scene
     plane = new gameObject(
-        new PlaneGeometry(60, 40, 1, 1),
+        new PlaneGeometry(16, 16, 1, 1),
         new LambertMaterial({ color: 0xffffff }),
         0, 0, 0);
 
@@ -74,11 +77,31 @@ function init() {
     console.log("Added Plane Primitive to scene...");
      
     
+    //Add a Cube to the Scene
+    cubeMaterial = new LambertMaterial({color:0x00ff00});
+    cubeGeometry = new CubeGeometry(2,2,2);
+    cube = new Mesh(cubeGeometry, cubeMaterial);
+    cube.castShadow = true;
+    cube.receiveShadow = true;
+    cube.position.y=1;
+    
+    
+    scene.add(cube);
+    console.log("Added Cube Primitive to scene...");
+    
+    
+    
+    
     // Add an AmbientLight to the scene
     ambientLight = new AmbientLight(0x090909);
     scene.add(ambientLight);
     console.log("Added an Ambient Light to Scene");
 	
+    
+    
+    
+    
+    
     // Add a SpotLight to the scene
     spotLight = new SpotLight(0xffffff);
     spotLight.position.set(-40, 60, 10);
@@ -87,13 +110,15 @@ function init() {
     console.log("Added a SpotLight Light to Scene");
     
     // Call the Custom Mesh function
-    initializeCustomMesh();
+    //initializeCustomMesh();
+    
+    
     
     
     // add controls
     gui = new GUI();
-    control = new Control(customMesh);
-    addControlPoints();
+    control = new Control();
+    //addControlPoints();
     addControl(control);
 
     // Add framerate stats
@@ -105,7 +130,7 @@ function init() {
     
     window.addEventListener('resize', onResize, false);
 }
-
+/*
 function initializeCustomMesh(): void {
     vertices = [
         new THREE.Vector3(1, 3, 1),
@@ -168,7 +193,7 @@ function createCustomMesh() {
     customMesh.name = "customMesh";
     scene.add(customMesh);
 }
-
+*/
 function onResize(): void {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -176,14 +201,14 @@ function onResize(): void {
 }
 
 function addControl(controlObject: Control): void {
-    gui.add(controlObject, 'clone');
-    for (var index = 0; index < 8; index++) {
+  //  gui.add(controlObject, 'clone');
+  /*  for (var index = 0; index < 8; index++) {
         var folder: GUI;
         folder = gui.addFolder('Vertices ' + (index + 1));
         folder.add(controlObject.points[index], 'x', -10, 10);
         folder.add(controlObject.points[index], 'y', -10, 10);
         folder.add(controlObject.points[index], 'z', -10, 10);
-    }
+    }*/
 }
 
 function addStatsObject() {
@@ -198,7 +223,7 @@ function addStatsObject() {
 // Setup main game loop
 function gameLoop(): void {
     stats.update();
-
+/*
     vertices = new Array<Vector3>();
     for (var index = 0; index < 8; index++) {
         vertices.push(new Vector3(
@@ -210,7 +235,7 @@ function gameLoop(): void {
     // remove our customMesh from the scene and add it every frame 
     scene.remove(scene.getObjectByName("customMesh"));
     createCustomMesh();
-
+*/
     // render using requestAnimationFrame
     requestAnimationFrame(gameLoop);
 	
@@ -230,9 +255,9 @@ function setupRenderer(): void {
 // Setup main camera for the scene
 function setupCamera(): void {
     camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.x = -20;
-    camera.position.y = 25;
-    camera.position.z = 20;
-    camera.lookAt(new Vector3(5, 0, 0));
+    camera.position.x = 0.6;
+    camera.position.y = 16;
+    camera.position.z = -20.5;
+    camera.lookAt(new Vector3(0, 0, 0));
     console.log("Finished setting up Camera...");
 }
